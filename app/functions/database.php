@@ -8,8 +8,19 @@ function connect(){
     return $pdo;
 }
 
-function create(){
+function create($table, $fields){
+    $pdo = connect();
+    if(!is_array($fields)){
+        $fields = (array) $fields;
+    }
 
+    $sql = "Insert into ($fields)";
+    $sql += "(".implode(',', array_keys($fields)).")";
+    $sql += " values(:".implode(',:', array_keys($fields)).")";
+
+    $insert = $pdo->prepare($sql);
+
+    return $insert->execute($fields);
 }
 
 function update(){
