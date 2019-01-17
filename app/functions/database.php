@@ -23,12 +23,30 @@ function create($table, $fields){
     return $insert->execute($fields);
 }
 
+function all($table){
+    $pdo = connect();
+
+    $sql = "select * from {$table}";
+    $list = $pdo->query($sql);
+
+    return $list->fetchAll();
+}
+
 function update(){
 
 }
 
-function find(){
+function find($table, $field, $value){
+    $pdo = connect();
 
+    $value = filter_var($value, FILTER_SANITIZE_NUMBER_INT);
+
+    $sql = "select * from {$table} where {$field} = :{$field}";
+    $find = $pdo->prepare($sql);
+    $find->bindValue($find, $value);
+    $find->execute();
+
+    return $find->fetch();
 }
 
 function delete(){
