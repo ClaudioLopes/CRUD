@@ -1,7 +1,7 @@
 <a href="?page=create_user">Cadastrar user</a>
 
 <h2>Pagina inicial</h2>
-
+<?=get('message');?>
 <table class="table table-striped table-hover">
     <thead>
         <tr>
@@ -25,7 +25,7 @@
                 <a href="page/edit_user&id=<?=$user->id;?>" class="btn bnt-success">Editar</a>
             </td>
             <td>
-                <a href="" class="btn btn-danger">Deletar</a>
+                <a href="?page=delete_user&id=<?=$user->id;?>" class="btn btn-danger">Deletar</a>
             </td>
         </tr>
     <?php endforeach;?>
